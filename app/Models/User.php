@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Models;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
+class User extends Authenticatable
+{
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'fname',
+        'lname',
+        'email',
+        'password',
+        'role',
+        'student_id',
+        'is_active',
+        'theme_preference',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'is_active' => 'boolean',
+            'password' => 'hashed',
+            'theme_preference' => 'string',
+        ];
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return trim((string) $this->fname.' '.(string) $this->lname);
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->full_name !== '' ? $this->full_name : (string) $this->email;
+    }
+
+    public function getRoleAttribute(?string $value): ?string
+    {
+        $spatieRole = $this->roles->first()?->name;
+
+        return $spatieRole ?: $value;
+    }
+
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function brandingUpdates(): HasMany
+    {
+        return $this->hasMany(BrandingSetting::class, 'updated_by');
+    }
+}

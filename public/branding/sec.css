@@ -1,0 +1,65 @@
+:root {
+  /*
+   * Surigao Education Center brand tokens
+   * Source: https://sec.edu.ph/ (--brand-red, --brand-dark-red, --brand-blue)
+   */
+  --brand-primary: #af0102;
+  --brand-accent: #800503;
+  --brand-text-dark: #171717;
+  --brand-text-light: #fff;
+
+  /*
+   * App-wide branding tokens (staff + kiosk)
+   */
+  --brand-page-bg: #f8f1e9;
+  --brand-school-name-color: #af0102;
+
+  --brand-nav-link: #af0102;
+  --brand-nav-link-active: #ffffff;
+  --brand-nav-hover-bg: #ffffff;
+  --brand-nav-hover-text: #800503;
+
+  --brand-logout-bg: #af0102;
+  --brand-logout-text: #ffffff;
+
+  --brand-button-bg: #af0102;
+  --brand-button-text: #ffffff;
+  --brand-button-hover-bg: #800503;
+  --brand-button-hover-text: #ffffff;
+
+  --brand-danger-bg: #af0102;
+  --brand-danger-hover-bg: #800503;
+  --brand-danger-text: #ffffff;
+
+  --brand-success-bg: #800503;
+  --brand-success-hover-bg: #af0102;
+  --brand-success-text: #ffffff;
+
+  --brand-footer-bg: #af0102;
+
+  --brand-kiosk-gradient-from: #af0102;
+  --brand-kiosk-gradient-to: #800503;
+
+  /*
+   * Backwards-compatible vars used by landing `style.css`
+   */
+  --primary-yellow: var(--brand-primary);
+  --secondary-green: var(--brand-accent);
+  --text-dark: var(--brand-text-dark);
+  --text-light: var(--brand-text-light);
+}
+
+/*
+ * Bootstrap theme variables (affects `.btn-primary`, etc.)
+ * Put this AFTER bootstrap.min.css in your layouts.
+ */
+:root {
+  --bs-primary: #af0102;
+  --bs-primary-rgb: 175, 1, 2;
+
+  --bs-success: #800503;
+  --bs-success-rgb: 128, 5, 3;
+
+  --bs-link-color: #af0102;
+  --bs-link-hover-color: #800503;
+}
